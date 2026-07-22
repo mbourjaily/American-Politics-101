@@ -62,7 +62,7 @@
   <h2>Recommended Books</h2>
   <div class="book-grid">
     <div class="book-card">
-      <img class="book-plate" src="https://covers.openlibrary.org/b/isbn/9780804190114-M.jpg" alt="Cover of On Tyranny" onerror="this.style.display='none'">
+      <img class="book-plate" src="https://covers.openlibrary.org/b/isbn/9780804190114-M.jpg" alt="Cover of On Tyranny" data-fallbacks='[]' onerror="bookCoverFallback(this)">
       <div class="book-info">
         <strong>On Tyranny</strong>
         <span>Timothy Snyder</span>
@@ -70,7 +70,7 @@
       </div>
     </div>
     <div class="book-card">
-      <img class="book-plate" src="https://covers.openlibrary.org/b/isbn/9780307455772-M.jpg" alt="Cover of The Righteous Mind" onerror="this.style.display='none'">
+      <img class="book-plate" src="https://covers.openlibrary.org/b/isbn/9780307455772-M.jpg" alt="Cover of The Righteous Mind" data-fallbacks='[]' onerror="bookCoverFallback(this)">
       <div class="book-info">
         <strong>The Righteous Mind</strong>
         <span>Jonathan Haidt</span>
@@ -78,7 +78,7 @@
       </div>
     </div>
     <div class="book-card">
-      <img class="book-plate" src="https://covers.openlibrary.org/b/isbn/9780826450654-M.jpg" alt="Cover of In Defense of Politics" onerror="this.style.display='none'">
+      <img class="book-plate" src="https://covers.openlibrary.org/b/isbn/9780826450654-M.jpg" alt="Cover of In Defense of Politics" data-fallbacks='[]' onerror="bookCoverFallback(this)">
       <div class="book-info">
         <strong>In Defense of Politics</strong>
         <span>Bernard Crick</span>
@@ -86,7 +86,7 @@
       </div>
     </div>
     <div class="book-card">
-      <img class="book-plate" src="https://covers.openlibrary.org/b/isbn/9780300254044-M.jpg" alt="Cover of Reclaiming Patriotism in an Age of Extremes" onerror="this.style.display='none'">
+      <img class="book-plate" src="https://books.google.com/books/content?id=bLQTEAAAQBAJ&printsec=frontcover&img=1&zoom=1" alt="Cover of Reclaiming Patriotism in an Age of Extremes" data-fallbacks='["https://covers.openlibrary.org/b/isbn/9780300254044-M.jpg"]' onerror="bookCoverFallback(this)">
       <div class="book-info">
         <strong>Reclaiming Patriotism in an Age of Extremes</strong>
         <span>Steven B. Smith</span>
@@ -94,7 +94,7 @@
       </div>
     </div>
     <div class="book-card">
-      <img class="book-plate" src="https://covers.openlibrary.org/b/isbn/9780231211581-M.jpg" alt="Cover of The Rural Voter" onerror="this.style.display='none'">
+      <img class="book-plate" src="https://books.google.com/books/content?id=HTHKEAAAQBAJ&printsec=frontcover&img=1&zoom=1" alt="Cover of The Rural Voter" data-fallbacks='["https://covers.openlibrary.org/b/isbn/9780231211581-M.jpg"]' onerror="bookCoverFallback(this)">
       <div class="book-info">
         <strong>The Rural Voter</strong>
         <span>Nicholas Jacobs &amp; Daniel Shea</span>
@@ -103,6 +103,20 @@
     </div>
   </div>
 </main>
+
+<script>
+function bookCoverFallback(img) {
+  var fallbacks = [];
+  try { fallbacks = JSON.parse(img.getAttribute('data-fallbacks') || '[]'); } catch (e) { fallbacks = []; }
+  if (fallbacks.length) {
+    var next = fallbacks.shift();
+    img.setAttribute('data-fallbacks', JSON.stringify(fallbacks));
+    img.src = next;
+  } else {
+    img.style.display = 'none';
+  }
+}
+</script>
 
 <footer>
   Prepared by Monte F. Bourjaily, IV, with the help of Claude.ai.
